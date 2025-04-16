@@ -16,7 +16,8 @@ import {
   Video, 
   Clock, 
   CheckCircle, 
-  Users
+  Users,
+  Coins // Using Coins icon instead of Bitcoin
 } from "lucide-react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
@@ -185,7 +186,7 @@ const Learn: React.FC = () => {
                   <span className="hidden md:inline">Technique</span>
                 </TabsTrigger>
                 <TabsTrigger value="crypto" className="flex items-center gap-2">
-                  <Bitcoin className="h-4 w-4" />
+                  <Coins className="h-4 w-4" />
                   <span className="hidden md:inline">Crypto</span>
                 </TabsTrigger>
                 <TabsTrigger value="psychology" className="flex items-center gap-2">
