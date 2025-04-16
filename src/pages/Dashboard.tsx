@@ -11,7 +11,19 @@ import {
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { ChartContainer } from "@/components/ui/chart";
 import Navbar from "@/components/Navbar";
-import { LineChart, BarChart, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { 
+  LineChart, 
+  BarChart, 
+  Line,
+  Area, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer 
+} from 'recharts';
 import { ArrowUp, ArrowDown, TrendingUp, DollarSign, Euro, Bitcoin, LineChart as LineChartIcon } from "lucide-react";
 
 // Données simulées pour les marchés
