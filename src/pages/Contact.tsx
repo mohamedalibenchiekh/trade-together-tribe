@@ -63,8 +63,8 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-medium text-finance-dark-blue dark:text-white mb-1">Téléphone</h3>
-                        <a href="tel:+33123456789" className="text-gray-600 dark:text-gray-400 hover:text-finance-blue dark:hover:text-finance-light-blue">
-                          +33 1 23 45 67 89
+                        <a href="tel:+21698270400" className="text-gray-600 dark:text-gray-400 hover:text-finance-blue dark:hover:text-finance-light-blue">
+                          +216 98 27 04 00
                         </a>
                       </div>
                     </CardContent>
@@ -78,8 +78,8 @@ const Contact = () => {
                       <div>
                         <h3 className="font-medium text-finance-dark-blue dark:text-white mb-1">Adresse</h3>
                         <p className="text-gray-600 dark:text-gray-400">
-                          123 Avenue de la Finance<br />
-                          75008 Paris, France
+                            Avenue Hamed El Ghazali<br />
+                            Sousse, 4000, Tunisie
                         </p>
                       </div>
                     </CardContent>

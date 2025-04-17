@@ -154,7 +154,7 @@ const PrivacyPolicy = () => {
               
               <h2 className="text-2xl font-bold mb-4 text-finance-dark-blue dark:text-white">10. Contact</h2>
               <p className="text-gray-700 dark:text-gray-300 mb-6">
-                Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à privacy@tradetogether.com ou par courrier à l'adresse suivante : Trade Together Tribe, 123 Avenue de la Finance, 75008 Paris, France.
+                Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à privacy@tradetogether.com ou par courrier à l'adresse suivante : Avenue Hamed El Ghazali Sousse, 4000, Tunisie .
               </p>
             </div>
           </div>

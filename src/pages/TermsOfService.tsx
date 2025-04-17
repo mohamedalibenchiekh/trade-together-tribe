@@ -94,7 +94,7 @@ const TermsOfService = () => {
               
               <h2 className="text-2xl font-bold mb-4 text-finance-dark-blue dark:text-white">7. Droit Applicable</h2>
               <p className="text-gray-700 dark:text-gray-300 mb-6">
-                Ces conditions d'utilisation sont régies par et interprétées conformément aux lois françaises, sans égard aux principes de conflits de lois. Tout litige découlant de ou lié à ces conditions sera soumis à la compétence exclusive des tribunaux de Paris, France.
+                Ces conditions d'utilisation sont régies par et interprétées conformément aux lois françaises, sans égard aux principes de conflits de lois. Tout litige découlant de ou lié à ces conditions sera soumis à la compétence exclusive des tribunaux de Sousse, Tunisie.
               </p>
               
               <Separator className="my-6" />
