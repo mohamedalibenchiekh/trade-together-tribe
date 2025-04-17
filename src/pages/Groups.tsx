@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -28,7 +27,8 @@ import {
   Filter,
   Lock,
   Globe,
-  ChevronRight
+  ChevronRight,
+  SortDesc
 } from "lucide-react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import Navbar from "@/components/Navbar";
@@ -163,10 +163,16 @@ const Groups = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <Button variant="outline" className="flex items-center">
-                <Filter className="mr-2 h-4 w-4" />
-                Filtrer
-              </Button>
+              <div className="flex items-center space-x-4 mb-6">
+                <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                  <Filter className="h-4 w-4" />
+                  <span>Filtrer</span>
+                </Button>
+                <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                  <SortDesc className="h-4 w-4" />
+                  <span>Trier</span>
+                </Button>
+              </div>
             </div>
             
             {/* Tabs */}
