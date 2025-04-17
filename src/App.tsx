@@ -39,6 +39,7 @@ const App = () => (
             <Route path="/learn" element={<Learn />} />
             <Route path="/community" element={<Community />} />
             <Route path="/groups" element={<Groups />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/terms" element={<TermsOfService />} />
@@ -47,7 +48,6 @@ const App = () => (
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/glossary" element={<GlossaryFinancial />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>
