@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Learn from "./pages/Learn";
 import Community from "./pages/Community";
 import Groups from "./pages/Groups";
+import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Contact from "./pages/Contact";

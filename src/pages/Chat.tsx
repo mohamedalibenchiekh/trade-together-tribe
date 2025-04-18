@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -7,17 +7,49 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/components/ui/use-toast";
+
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
 
 const Chat = () => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
 
+  // Load previous messages when component mounts
+  useEffect(() => {
+    if (user) {
+      const loadMessages = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('chat_messages')
+            .select()
+            .eq('user_id', user.id)
+            .order('created_at', { ascending: true });
+
+          if (error) throw error;
+          if (data) {
+            setMessages(data.map(msg => ({
+              role: msg.role as 'user' | 'assistant',
+              content: msg.content
+            })));
+          }
+        } catch (error) {
+          console.error("Error loading messages:", error);
+        }
+      };
+
+      loadMessages();
+    }
+  }, [user]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || !user) return;
 
     try {
       setIsLoading(true);
@@ -25,6 +57,7 @@ const Chat = () => {
       setMessages(prev => [...prev, newMessage]);
       setMessage("");
 
+      // Call the edge function
       const { data, error } = await supabase.functions.invoke('chat', {
         body: { message }
       });
@@ -36,17 +69,34 @@ const Chat = () => {
 
       // Store messages in database
       if (user) {
-        await supabase.from('chat_messages').insert([
-          { user_id: user.id, content: message, role: 'user' },
-          { user_id: user.id, content: data.reply, role: 'assistant' }
-        ]);
+        // Insert as individual records instead of an array
+        const { error: userMsgError } = await supabase
+          .from('chat_messages')
+          .insert({
+            user_id: user.id,
+            content: newMessage.content,
+            role: newMessage.role
+          });
+
+        if (userMsgError) throw userMsgError;
+
+        const { error: assistantMsgError } = await supabase
+          .from('chat_messages')
+          .insert({
+            user_id: user.id,
+            content: assistantMessage.content,
+            role: assistantMessage.role
+          });
+
+        if (assistantMsgError) throw assistantMsgError;
       }
-    } catch (error) {
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Error",
         description: "Failed to send message. Please try again."
       });
+      console.error("Chat error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -54,20 +104,27 @@ const Chat = () => {
 
   return (
     <div className="container mx-auto max-w-4xl p-4">
+      <h1 className="text-2xl font-bold mb-4">AI Financial Assistant</h1>
       <Card className="h-[600px] flex flex-col">
         <ScrollArea className="flex-1 p-4">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`mb-4 p-3 rounded-lg ${
-                msg.role === 'user' 
-                  ? 'bg-primary text-primary-foreground ml-auto max-w-[80%]' 
-                  : 'bg-muted text-muted-foreground mr-auto max-w-[80%]'
-              }`}
-            >
-              {msg.content}
+          {messages.length === 0 ? (
+            <div className="text-center text-muted-foreground mt-8">
+              Ask me anything about finance, trading, or investments!
             </div>
-          ))}
+          ) : (
+            messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`mb-4 p-3 rounded-lg ${
+                  msg.role === 'user' 
+                    ? 'bg-primary text-primary-foreground ml-auto max-w-[80%]' 
+                    : 'bg-muted text-muted-foreground mr-auto max-w-[80%]'
+                }`}
+              >
+                {msg.content}
+              </div>
+            ))
+          )}
         </ScrollArea>
         
         <form onSubmit={handleSubmit} className="p-4 border-t flex gap-2">
