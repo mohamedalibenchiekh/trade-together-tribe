@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { 
   Toast,
@@ -166,7 +167,7 @@ function toast(props: Toast) {
       onOpenChange: (open) => {
         if (!open) dismiss();
       },
-    },
+    } as ToasterToast, // Add type assertion to resolve the error
   });
 
   return {
