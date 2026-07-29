@@ -55,7 +55,7 @@ const Chat = () => {
       // Store messages in memory for now
       // We'll update this to use the database once the chat_messages table
       // is properly defined in your Supabase types
-    } catch (error: any) {
+    } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",

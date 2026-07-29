@@ -68,13 +68,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       navigate("/dashboard");
       return { data: data.session, error: null };
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as Error;
       toast({
         variant: "destructive",
         title: "Erreur de connexion",
-        description: error.message || "Une erreur est survenue lors de la connexion",
+        description: err.message || "Une erreur est survenue lors de la connexion",
       });
-      return { data: null, error };
+      return { data: null, error: err };
     }
   };
 
@@ -104,13 +105,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       navigate("/dashboard");
       return { data: data.session, error: null };
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as Error;
       toast({
         variant: "destructive",
         title: "Erreur d'inscription",
-        description: error.message || "Une erreur est survenue lors de l'inscription",
+        description: err.message || "Une erreur est survenue lors de l'inscription",
       });
-      return { data: null, error };
+      return { data: null, error: err };
     }
   };
 
